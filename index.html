@@ -4,39 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple to-do app with filters, local storage, and completed task history.">
     <title>TO-DO app</title>
     <link rel="stylesheet" href="style.css">
-  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=history" />
+   </link>
+
+      <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add" />
+   </link>
+        
+
+        
+
 </head>
 
 <body>
- <nav class="nav-container">
-     <p  class="nav-user-greeting"> Welcome.</p>
-     <button class="nav-history-button" aria-label="View history">
-        <img class="button-icon" src="assets/history_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg" alt="">
-     </button>
+    <div class="page-content">
+        <nav class="nav-container">
+            <p class="nav-user-greeting">Welcome.</p>
+            <button id="historyButton" class="nav-history-button" type="button" aria-label="Show completed tasks">
+                <span class="material-symbols-outlined">history</span>
+            </button>
+        </nav>
 
- </nav>    
-    <header class="hero-container ">
-        <h1 class="hero-text">What are you doing today.?</h1>
-    </header>
+        <header class="hero-container">
+            <h1 class="hero-text">What are you doing today?</h1>
+            <p class="hero-subtitle">Keep your plan, check it off, and save it automatically.</p>
+        </header>
 
-    <main class="main-container">
-        <button class="add-task-button" aria-label="Add task">
-            <img class="button-icon" src="assets/add_circle_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg" alt="">
-        </button>
+        <main class="main-container">
+            <section class="task-panel">
+                <form id="taskForm" class="task-form">
+                    <input id="taskInput" class="task-input" type="text" placeholder="Add a new task..." aria-label="New task">
+                    <button class="task-submit" type="submit">
+                        <span class="material-symbols-outlined">add</span>
+                        Add task
+                    </button>
+                </form>
 
-        <ol class="main-list">
-            <li class="main-list-item"> <input type="checkbox"> Text testing </li>
+                <div class="task-toolbar">
+                    <div class="task-stats">
+                        <span id="activeCount">0 active</span>
+                        <span class="divider">•</span>
+                        <span id="completedCount">0 completed</span>
+                    </div>
+                    <div class="task-filters" role="group" aria-label="Task filters">
+                        <button type="button" class="filter-button active" data-filter="all">All</button>
+                        <button type="button" class="filter-button" data-filter="active">Active</button>
+                        <button type="button" class="filter-button" data-filter="completed">Done</button>
+                    </div>
+                </div>
 
-        </ol>
-        <video autoplay muted loop playsinline poster="fallback-image.jpg" id="bg-video">
-  <source src="/assets/Video Project.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+                <div class="list-kicker-box">
+                    <ul class="task-list" id="taskList">
+                        <li class="task-placeholder">Loading tasks...</li>
+                    </ul>
+                </div>
 
+                <button id="clearCompleted" type="button" class="clear-completed">Clear completed</button>
+            </section>
+        </main>
 
-    </main>
+        <div class="history-panel" id="historyPanel" aria-hidden="true">
+            <div class="history-content" role="dialog" aria-labelledby="historyTitle" aria-modal="true">
+                <div class="history-header">
+                    <h2 id="historyTitle">Completed tasks</h2>
+                    <button id="closeHistory" type="button" class="history-close" aria-label="Close completed tasks panel">×</button>
+                </div>
+                <p class="history-description">Review the tasks you have finished.</p>
+                <ul id="historyList" class="history-list"></ul>
+                <p class="history-empty">No completed tasks yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <video autoplay muted loop playsinline poster="fallback-image.jpg" id="bg-video">
+        <source src="assets/Video Project.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script src="script.js" defer></script>
 </body>
 
 </html>
